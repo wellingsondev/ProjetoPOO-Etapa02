@@ -1,10 +1,10 @@
 public class Paciente {
-    public String nome;
-    public String cpf;
-    public int idade;
-    public String telefone;
-    public String convenioNome;
-    public boolean ativo;
+    private String nome;
+    private String cpf;
+    private int idade;
+    private String telefone;
+    private String convenioNome;
+    private boolean ativo;
 
     public Paciente(String nome, String cpf) {
         this.nome = nome;
@@ -59,5 +59,55 @@ public class Paciente {
         return "Nome: " + nome + " | CPF: " + cpf + " | Idade: " + idade
                 + " | Tel: " + telefone + " | Convenio: " + convenioNome
                 + " | Ativo: " + status;
+    }
+
+    public String getNome(){
+        return nome;
+    }
+
+    public void setNome(String nome) {
+    if (!nome.equals("")) {
+        this.nome = nome;
+    }
+    }
+
+    public String getCpf() {
+    return cpf;
+    }
+
+    public void setCpf(String cpf) {
+    if (!cpf.equals("")) {
+        this.cpf = cpf;
+    }
+    }
+
+    public int getIdade() {
+        return idade;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public String getConvenioNome() {
+        return convenioNome;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setIdade(int idade) {
+        if (idade >= 0) {
+            this.idade = idade;
+        }
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public void setConvenioNome(String convenioNome) {
+        this.convenioNome = convenioNome;
     }
 }
