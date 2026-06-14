@@ -1,10 +1,10 @@
 public class Profissional {
-    public String nome;
-    public String especialidade;
-    public String registroProfissional;
-    public double valorConsulta;
-    public String[] diasDisponiveis;
-    public int totalDias;
+    private String nome;
+    private String especialidade;
+    private String registroProfissional;
+    private double valorConsulta;
+    private String[] diasDisponiveis;
+    private int totalDias;
 
     // so nome e especialidade
     public Profissional(String nome, String especialidade) {
@@ -80,5 +80,52 @@ public class Profissional {
         }
         return "Nome: " + nome + " | Espec: " + especialidade + " | Reg: " + registroProfissional
                 + " | Valor: R$" + valorConsulta + " | Dias: " + dias;
+    }
+    //getters
+    public String getNome() {
+    return nome;
+    }
+
+    public String getEspecialidade() {
+        return especialidade;
+    }
+
+    public String getRegistroProfissional() {
+        return registroProfissional;
+    }
+
+    public double getValorConsulta() {
+        return valorConsulta;
+    }
+
+    public String[] getDiasDisponiveis() {
+        return diasDisponiveis;
+    }
+
+    public int getTotalDias() {
+        return totalDias;
+    }
+
+    //setters
+    public void setNome(String nome) {
+    if (!nome.equals("")) {
+        this.nome = nome;
+    }
+    }
+
+    public void setEspecialidade(String especialidade) {
+        if (!especialidade.equals("")) {
+            this.especialidade = especialidade;
+        }
+    }
+
+    public void setRegistroProfissional(String registroProfissional) {
+        this.registroProfissional = registroProfissional;
+    }
+
+    public void setValorConsulta(double valorConsulta) {
+        if (valorConsulta >= 0) {
+            this.valorConsulta = valorConsulta;
+        }
     }
 }
