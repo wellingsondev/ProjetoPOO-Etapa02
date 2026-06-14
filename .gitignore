@@ -1,0 +1,13 @@
+# Arquivos compilados Java
+*.class
+
+# Diretórios comuns de build
+bin/
+target/
+build/
+out/
+
+# Arquivos de IDE
+.idea/
+.vscode/
+*.iml

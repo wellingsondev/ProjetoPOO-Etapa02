@@ -1,3 +1,5 @@
+
+
 public class Atendimento {
     public int indiceConsulta;
     public String observacoes;
