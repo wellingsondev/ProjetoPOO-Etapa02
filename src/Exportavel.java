@@ -1,5 +1,5 @@
 public interface Exportavel {
 
-    void expoortarDados();
+    void exportarDados();
     
 }
