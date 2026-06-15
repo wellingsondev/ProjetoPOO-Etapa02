@@ -1,11 +1,11 @@
 
 
 public class Atendimento {
-    public int indiceConsulta;
-    public String observacoes;
-    public String diagnostico;
-    public String[] procedimentos;
-    public int totalProcedimentos;
+    private int indiceConsulta;
+    private String observacoes;
+    private String diagnostico;
+    private String[] procedimentos;
+    private int totalProcedimentos;
 
     // registro basico - so observacoes
     public Atendimento(int indiceConsulta, String observacoes) {

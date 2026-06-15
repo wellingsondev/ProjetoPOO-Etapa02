@@ -1,16 +1,15 @@
-import java.util.Date;
 
 public class Consulta implements Agendavel {
     private String cpfPaciente;
     private String nomeProfissional;
-    private Date data;
+    private String data;
     private String horario;
     private String tipo;
     private String status;
 
 
     // sem tipo - assume inicial
-    public Consulta(String cpfPaciente, String nomeProfissional, Date data, String horario) {
+    public Consulta(String cpfPaciente, String nomeProfissional, String data, String horario) {
         this.cpfPaciente = cpfPaciente;
         this.nomeProfissional = nomeProfissional;
         this.data = data;
@@ -19,7 +18,7 @@ public class Consulta implements Agendavel {
         this.status = "agendada";
     }
 
-    public Consulta(String cpfPaciente, String nomeProfissional, Date data, String horario, String tipo) {
+    public Consulta(String cpfPaciente, String nomeProfissional, String data, String horario, String tipo) {
         this.cpfPaciente = cpfPaciente;
         this.nomeProfissional = nomeProfissional;
         this.data = data;
@@ -28,7 +27,7 @@ public class Consulta implements Agendavel {
         this.status = "agendada";
     }
     // esse aqui a gente usa na remarcacao pra poder setar o status direto
-     public Consulta(String cpfPaciente, String nomeProfissional, Date data,
+     public Consulta(String cpfPaciente, String nomeProfissional, String data,
                     String horario, String tipo, String status) {
         this.cpfPaciente = cpfPaciente;
         this.nomeProfissional = nomeProfissional;
@@ -44,7 +43,7 @@ public class Consulta implements Agendavel {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
-    public void setData(Date data) {
+    public void setData(String data) {
         this.data = data;
     }
     public void setHorario(String horario) {
@@ -57,7 +56,7 @@ public class Consulta implements Agendavel {
     public String getNomeProfissional() {
         return nomeProfissional;
     }
-    public Date getData() {
+    public String getData() {
         return data;
     }
     public String getHorario() {
@@ -82,7 +81,11 @@ public class Consulta implements Agendavel {
         return "Consulta cancelada. Motivo: " + motivo;
     }
 
-    public void remarcar() {
+    public void remarcar(String cpf, String nomeProf, String novaData, String novoHorario) {
+        this.cpfPaciente = cpf;
+        this.nomeProfissional = nomeProf;
+        this.data = novaData;
+        this.horario = novoHorario;
         this.status = "remarcada";
     }
 
