@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 
 public class Consulta implements Agendavel {
     private String cpfPaciente;
@@ -6,6 +8,7 @@ public class Consulta implements Agendavel {
     private String horario;
     private String tipo;
     private String status;
+    private List<Double> multas = new ArrayList<>();
 
 
     // sem tipo - assume inicial
@@ -15,7 +18,7 @@ public class Consulta implements Agendavel {
         this.data = data;
         this.horario = horario;
         this.tipo = "inicial";
-        this.status = "agendada";
+        this.agendar();
     }
 
     public Consulta(String cpfPaciente, String nomeProfissional, String data, String horario, String tipo) {
@@ -24,7 +27,7 @@ public class Consulta implements Agendavel {
         this.data = data;
         this.horario = horario;
         this.tipo = tipo;
-        this.status = "agendada";
+        this.agendar();
     }
     // esse aqui a gente usa na remarcacao pra poder setar o status direto
      public Consulta(String cpfPaciente, String nomeProfissional, String data,
@@ -80,7 +83,7 @@ public class Consulta implements Agendavel {
         this.status = "cancelada";
         return "Consulta cancelada. Motivo: " + motivo;
     }
-
+    @Override
     public void remarcar(String cpf, String nomeProf, String novaData, String novoHorario) {
         this.cpfPaciente = cpf;
         this.nomeProfissional = nomeProf;
@@ -97,10 +100,22 @@ public class Consulta implements Agendavel {
         return "Paciente(CPF): " + cpfPaciente + " | Prof: " + nomeProfissional
                 + " | Data: " + data + " | Hora: " + horario
                 + " | Tipo: " + tipo + " | Status: " + status;
+                
     }
 
     @Override
     public void agendar() {
             this.status = "agendada";
     }
+
+    public void setMultas(double multa){
+        this.multas.add(multa);
+    }
+
+    public List<Double> getMultas(){
+
+        return this.multas;
+    }
+
+
 }

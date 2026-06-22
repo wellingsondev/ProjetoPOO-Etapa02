@@ -25,7 +25,7 @@
                     case 1: menuPacientes(); break;
                     case 2: menuProfissionais(); break;
                     case 3: menuConsultas(); break;
-                    case 4: ClinicaServico.menuAtendimentos(); break;
+                    case 4: menuAtendimentos(); break;
                     case 5: menuPagamentos(); break;
                     case 6: menuRelatorios(); break;
                     case 0: break;
@@ -144,7 +144,20 @@
             }
         }
 
-       
+           // ---- ATENDIMENTOS ----
+
+        public static void menuAtendimentos() {
+            int op = -1;
+            while (op != 0) {
+                System.out.println("\n--- ATENDIMENTOS ---");
+                System.out.println("1 - Registrar atendimento");
+                System.out.println("0 - Voltar");
+                System.out.print("Opcao: ");
+                op = Integer.parseInt(sc.nextLine());
+
+                if (op == 1) ClinicaServico.registrarAtendimento();
+            }
+    }
 
         // ---- RELATORIOS ----
 
