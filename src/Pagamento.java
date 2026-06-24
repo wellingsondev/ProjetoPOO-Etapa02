@@ -1,17 +1,32 @@
-public class Pagamento {
-    public int indiceConsulta;
-    public double valorFinal;
-    public String tipoPagamento;
-    public int parcelas;
+// eu fiz comit dessa classe no repositorio errado...
+public abstract class Pagamento {
+    private int indiceConsulta;
+    private double valorFinal;
+    private String tipoPagamento;
+    private int parcelas;
 
+    //getters por conta do encapsulamento
+    public int getIndiceConsulta(){
+        return indiceConsulta;
+    }
+    public double getValorFinal(){
+        return valorFinal;
+    }
+    public String getTipoPagamento(){
+        return tipoPagamento;
+    }
+    public int getParcelas(){
+        return parcelas;
+    }
+
+    //Pagamento comum, dinheiro ou pix sem parcela
     public Pagamento(int indiceConsulta, double valorFinal, String tipoPagamento) {
         this.indiceConsulta = indiceConsulta;
         this.valorFinal = valorFinal;
         this.tipoPagamento = tipoPagamento;
         this.parcelas = 1;
     }
-
-    // com parcelas (so pra cartao)
+    //possivel parcelar / cartao
     public Pagamento(int indiceConsulta, double valorFinal, String tipoPagamento, int parcelas) {
         this.indiceConsulta = indiceConsulta;
         this.valorFinal = valorFinal;
@@ -19,40 +34,17 @@ public class Pagamento {
         this.parcelas = parcelas;
     }
 
-    // sem desconto nenhum
-    public static double calcularValor(double valorBase) {
-        return valorBase;
-    }
-
-    // com desconto em percentual
-    public static double calcularValor(double valorBase, double percentualDesconto) {
-        double desconto = valorBase * percentualDesconto / 100;
-        double valor = valorBase - desconto;
-        if (valor < 0) {
-            valor = 0;
-        }
-        return valor;
-    }
-
-    // com desconto e multa somada
-    public static double calcularValor(double valorBase, double percentualDesconto, double multa) {
-        double desconto = valorBase * percentualDesconto / 100;
-        double valor = valorBase - desconto + multa;
-        if (valor < 0) {
-            valor = 0;
-        }
-        return valor;
-    }
+    public abstract double calcularValorFinal();
 
     public String exibirResumo() {
-        // arredonda pra 2 casas
-        double valorArredondado = Math.round(valorFinal * 100.0) / 100.0;
-        String resumo = "Consulta #" + indiceConsulta + " | Valor: R$" + valorArredondado
-                + " | Tipo: " + tipoPagamento + " | Parcelas: " + parcelas;
+        double valor = calcularValorFinal();
+        String resumo = "Consulta #" + indiceConsulta + " | Valor: R$" + valor + " | Tipo: " + tipoPagamento + " | Parcelas: " + parcelas;
         if (parcelas > 1) {
-            double valorParcela = Math.round((valorFinal / parcelas) * 100.0) / 100.0;
-            resumo = resumo + " (R$" + valorParcela + " cada)";
+            double valorParcela =
+                    Math.round((valor / parcelas) * 100.0) / 100.0;
+            resumo += " (R$" + valorParcela + " cada)";
         }
         return resumo;
     }
 }
+

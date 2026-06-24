@@ -4,6 +4,9 @@
     import java.util.Scanner;
 
     public class Main {
+
+        //Agora e uma arraylist, e n um array (commit antigo mas recolocado, pois dei commit em outro repositorio)
+        static ArrayList<Pagamento> pagamentos = new ArrayList<>();
         
         static Scanner sc = new Scanner(System.in);
 
