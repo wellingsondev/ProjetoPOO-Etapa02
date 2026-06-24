@@ -241,7 +241,7 @@ public class ClinicaServico {
                 System.out.println("Paciente nao encontrado.");
                 return;
             }
-            if (!paciente.ativo) {
+            if (!paciente.isAtivo()) {
                 System.out.println("Paciente inativo. Nao e possivel agendar.");
                 return;
             }
@@ -328,7 +328,7 @@ public class ClinicaServico {
             System.out.println("Paciente nao encontrado.");
             return;
         }
-        if (!paciente.ativo) {
+        if (!paciente.isAtivo()) {
             System.out.println("Paciente inativo. Nao e possivel agendar.");
             return;
         }
