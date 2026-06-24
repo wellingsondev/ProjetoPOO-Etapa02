@@ -1,5 +1,4 @@
-public class Profissional {
-    private String nome;
+public class Profissional extends Pessoa {
     private String especialidade;
     private String registroProfissional;
     private double valorConsulta;
@@ -7,8 +6,9 @@ public class Profissional {
     private int totalDias;
 
     // so nome e especialidade
-    public Profissional(String nome, String especialidade) {
-        this.nome = nome;
+    public Profissional(String nome, String cpf, String especialidade) {
+        super(nome, cpf);
+
         this.especialidade = especialidade;
         this.registroProfissional = "";
         this.valorConsulta = 0;
@@ -16,8 +16,9 @@ public class Profissional {
         this.totalDias = 0;
     }
 
-    public Profissional(String nome, String especialidade, String registroProfissional, double valorConsulta) {
-        this.nome = nome;
+    public Profissional(String nome, String cpf, String especialidade, String registroProfissional, double valorConsulta) {
+        super(nome, cpf);
+
         this.especialidade = especialidade;
         this.registroProfissional = registroProfissional;
         this.valorConsulta = valorConsulta;
@@ -26,9 +27,9 @@ public class Profissional {
     }
 
     // construtor completo com dias
-    public Profissional(String nome, String especialidade, String registroProfissional,
-                        double valorConsulta, String[] dias, int totalDias) {
-        this.nome = nome;
+    public Profissional(String nome, String cpf, String especialidade, String registroProfissional, double valorConsulta, String[] dias, int totalDias) {
+        super(nome, cpf);
+
         this.especialidade = especialidade;
         this.registroProfissional = registroProfissional;
         this.valorConsulta = valorConsulta;
@@ -78,14 +79,10 @@ public class Profissional {
             if (i > 0) dias = dias + ", ";
             dias = dias + diasDisponiveis[i];
         }
-        return "Nome: " + nome + " | Espec: " + especialidade + " | Reg: " + registroProfissional
+        return "Nome: " + getNome() + " | Espec: " + especialidade + " | Reg: " + registroProfissional
                 + " | Valor: R$" + valorConsulta + " | Dias: " + dias;
     }
     //getters
-    public String getNome() {
-    return nome;
-    }
-
     public String getEspecialidade() {
         return especialidade;
     }
@@ -107,12 +104,6 @@ public class Profissional {
     }
 
     //setters
-    public void setNome(String nome) {
-    if (!nome.equals("")) {
-        this.nome = nome;
-    }
-    }
-
     public void setEspecialidade(String especialidade) {
         if (!especialidade.equals("")) {
             this.especialidade = especialidade;
