@@ -146,6 +146,31 @@
                 }
             }
         }
+        //PRIMEIRA FUNCAO DO pagamentoDireto()
+    public static void pagamentoDireto() {
+        System.out.print("Indice da consulta: ");
+        int idxConsulta = Integer.parseInt(sc.nextLine());
+
+        // Validação simples para evitar indice invalido
+        if (idxConsulta < 0 || idxConsulta >= totalConsultas) {
+            System.out.println("Indice invalido.");
+            return;
+        }
+
+        // Lê o valor do pagamento
+        System.out.print("Valor: ");
+        double valor = Double.parseDouble(sc.nextLine());
+
+        // Define o tipo de pagamento
+        System.out.print("Tipo (dinheiro/cartao/convenio): ");
+        String tipoPag = sc.nextLine();
+
+        Pagamento pagamento;
+
+        //se for cartao
+        // if (tipoPag.equals("cartao")) vou add no prox commit
+
+    }
 
            // ---- ATENDIMENTOS ----
 
