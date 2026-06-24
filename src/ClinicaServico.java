@@ -6,12 +6,12 @@ import java.util.Scanner;
 
 public class ClinicaServico {
     
-    private static List<Paciente> pacientes = new ArrayList<>();
-    private static List<Profissional> profissionais = new ArrayList<>();
+    private static ArrayList<Paciente> pacientes = new ArrayList<>();
+    private static ArrayList<Profissional> profissionais = new ArrayList<>();
 
-    private static List<Consulta> consultas = new ArrayList<>();
-    private static List<Atendimento> atendimentos = new ArrayList<>();
-    private static List<Pagamento> pagamentos = new ArrayList<>();
+    private static ArrayList<Consulta> consultas = new ArrayList<>();
+    private static ArrayList<Atendimento> atendimentos = new ArrayList<>();
+    private static ArrayList<Pagamento> pagamentos = new ArrayList<>();
     static Scanner sc = new Scanner(System.in);
 
 
@@ -694,99 +694,126 @@ public class ClinicaServico {
             System.out.println(atendimentos.get(atendimentos.size() -1).exibirResumo());
             System.out.println("Consulta marcada como realizada.");
         }
-    
+    // paulo-victor1 - mudei aqui e na minha branch, n foi ajustada da forma q deveria
     public static void pagamentoDireto() {
-            System.out.print("Indice da consulta: ");
-            int idxConsulta = Integer.parseInt(sc.nextLine());
-
-            if (idxConsulta < 0 || idxConsulta >= consultas.size()) {
-                System.out.println("Indice invalido.");
-                return;
-            }
-
-            System.out.print("Valor: ");
-            double valor = Double.parseDouble(sc.nextLine());
-            System.out.print("Tipo (dinheiro/cartao/convenio): ");
-            String tipoPag = sc.nextLine();
-        
-            if (tipoPag.equals("cartao")) {
-                System.out.print("Parcelas (1 a 3): ");
-                int parc = Integer.parseInt(sc.nextLine());
-                if (parc < 1) parc = 1;
-                if (parc > 3) parc = 3;
-                pagamentos.add(new Pagamento(idxConsulta, valor, tipoPag, parc));                if (parc > 1) {
-                    double vlrParc = Math.round((valor / parc) * 100.0) / 100.0;
-                    System.out.println("Pagamento em " + parc + "x de R$" + vlrParc);
-                }
-            } else {
-            pagamentos.add(new Pagamento(idxConsulta, valor, tipoPag));
-            }
-            System.out.println("Pagamento registrado!");
-        }
-
-    public static void pagamentoAutomatico() {
         System.out.print("Indice da consulta: ");
         int idxConsulta = Integer.parseInt(sc.nextLine());
 
-        if (idxConsulta < 0 || idxConsulta >= consultas.size()) {
+        // Validação simples para evitar indice invalido (eu mudei o if pq n tava compativel com ArrL)
+       if (idxConsulta < 0 || idxConsulta >= consultas.size()) {
             System.out.println("Indice invalido.");
             return;
         }
 
-        // obtem valor do profissional
-        String nomeProf = consultas.get(idxConsulta).getNomeProfissional();
-        Profissional profissional = buscarIndiceProfissional(nomeProf);
-        double valorBase = profissional.getValorConsulta();
+        // Lê o valor do pagamento
+        System.out.print("Valor: ");
+        double valor = Double.parseDouble(sc.nextLine());
 
-        // verifica convenio e tipo
-        String cpfPac = consultas.get(idxConsulta).getCpfPaciente();
-        Paciente paciente = buscarIndicePaciente(cpfPac);
-
-        boolean temConvenio = !paciente.getConvenioNome().equals("");
-        boolean ehRetorno = consultas.get(idxConsulta).getTipo().equals("retorno");
-
-        double desconto = 0;
-        if (ehRetorno) desconto = desconto + 20;
-        if (temConvenio) desconto = desconto + 40;
-
-        System.out.print("Tem multa pendente? (1-Nao / 2-Sim): ");
-        int temMulta = Integer.parseInt(sc.nextLine());
-        double valorMulta = 0;
-
-        double valorFinal;
-        if (temMulta == 1 && desconto == 0) {
-            valorFinal = Pagamento.calcularValor(valorBase);
-        } else if (temMulta == 1) {
-            valorFinal = Pagamento.calcularValor(valorBase, desconto);
-        } else {
-            System.out.print("Valor da multa: ");
-            valorMulta = Double.parseDouble(sc.nextLine());
-            valorFinal = Pagamento.calcularValor(valorBase, desconto, valorMulta);
-        }
-
-        // mostra detalhes
-        System.out.println("Valor base: R$" + valorBase);
-        System.out.println("Desconto: " + desconto + "%");
-        if (valorMulta > 0) System.out.println("Multa: R$" + valorMulta);
-        double vlrFinalArredondado = Math.round(valorFinal * 100.0) / 100.0;
-        System.out.println("Valor final: R$" + vlrFinalArredondado);
-
+        // Define o tipo de pagamento
         System.out.print("Tipo (dinheiro/cartao/convenio): ");
         String tipoPag = sc.nextLine();
 
+        Pagamento pagamento;
+
+        // se for cartao (add completo no commit)
         if (tipoPag.equals("cartao")) {
+
             System.out.print("Parcelas (1 a 3): ");
             int parc = Integer.parseInt(sc.nextLine());
-            if (parc < 1) parc = 1;
-            if (parc > 3) parc = 3;
-            pagamentos.add(new Pagamento(idxConsulta, valorFinal, tipoPag, parc));
-            double vlrParc = Math.round((valorFinal / parc) * 100.0) / 100.0;
-            System.out.println("Pagamento em " + parc + "x de R$" + vlrParc);
+
+            pagamento = new PagamentoCartao(idxConsulta, valor, tipoPag, parc);
+
+        } else if (tipoPag.equals("dinheiro")) {
+
+            pagamento = new PagamentoDinheiro(idxConsulta, valor, tipoPag);
+
         } else {
-            pagamentos.add(new Pagamento(idxConsulta, valorFinal, tipoPag));
+            pagamento = new PagamentoConvenio(idxConsulta, valor, tipoPag);
         }
+        pagamentos.add(pagamento);
+        System.out.println(pagamento.exibirResumo());
         System.out.println("Pagamento registrado!");
+
     }
+
+   public static void pagamentoAutomatico() {
+
+    System.out.print("Indice da consulta: ");
+    int idxConsulta = Integer.parseInt(sc.nextLine());
+
+    // validação ArrayList
+    if (idxConsulta < 0 || idxConsulta >= consultas.size()) {
+        System.out.println("Indice invalido.");
+        return;
+    }
+
+    // pega consulta
+    Consulta consulta = consultas.get(idxConsulta);
+
+    String nomeProf = consulta.getNomeProfissional();
+    int idxProf = Relatorio.buscarIndiceProfissional(nomeProf, profissionais);
+
+    if (idxProf == -1) {
+        System.out.println("Profissional não encontrado.");
+        return;
+    }
+
+    double valorBase = profissionais.get(idxProf).getValorConsulta();
+
+    // paciente
+    String cpfPac = consulta.getCpfPaciente();
+    int idxPac = Relatorio.buscarIndicePaciente(cpfPac, pacientes);
+
+    if (idxPac == -1) {
+        System.out.println("Paciente não encontrado.");
+        return;
+    }
+
+    boolean temConvenio = !pacientes.get(idxPac).getConvenioNome().isEmpty();
+    boolean ehRetorno = consulta.getTipo().equals("retorno");
+
+    double desconto = 0;
+    if (ehRetorno) desconto += 20;
+    if (temConvenio) desconto += 40;
+
+    double valorFinal = valorBase * (1 - desconto / 100.0);
+
+    System.out.print("Tem multa pendente? (1-Nao / 2-Sim): ");
+    int temMulta = Integer.parseInt(sc.nextLine());
+
+    if (temMulta == 2) {
+        System.out.print("Valor da multa: ");
+        double multa = Double.parseDouble(sc.nextLine());
+        valorFinal += multa;
+    }
+
+    System.out.print("Tipo (dinheiro/cartao/convenio): ");
+    String tipoPag = sc.nextLine();
+
+    Pagamento pagamento;
+
+    if (tipoPag.equals("cartao")) {
+
+        System.out.print("Parcelas (1 a 3): ");
+        int parc = Integer.parseInt(sc.nextLine());
+
+        pagamento = new PagamentoCartao(idxConsulta, valorFinal, tipoPag, parc);
+
+    } else if (tipoPag.equals("dinheiro")) {
+
+        pagamento = new PagamentoDinheiro(idxConsulta, valorFinal, tipoPag);
+
+    } else {
+
+        pagamento = new PagamentoConvenio(idxConsulta, valorFinal, tipoPag);
+    }
+
+    pagamentos.add(pagamento);
+
+    System.out.println(pagamento.exibirResumo());
+}
+    
+
 
     public static void listarPagamentos() {
             if (pagamentos.isEmpty()) {
