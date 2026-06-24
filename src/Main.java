@@ -220,15 +220,53 @@ public class Main {
         System.out.print("Tipo (1-Minimo / 2-Com registro e valor / 3-Completo): ");
         int tipo = Integer.parseInt(sc.nextLine());
 
-        if (tipo == 1) {
-            profissionais[totalProfissionais] = new Profissional(nome, cpf, esp);
-        } else if (tipo == 2) {
-            System.out.print("Registro: ");
-            String reg = sc.nextLine();
-            System.out.print("Valor consulta: ");
-            double valor = Double.parseDouble(sc.nextLine());
-            profissionais[totalProfissionais] = new Profissional(nome, cpf, esp, reg, valor);
-        } else {
+        if (tipo ==1) {
+            if (esp.equals("psicologia")) {
+                profissionais[totalProfissionais] =
+                    new Psicologo(nome, cpf);
+        }
+        
+        else if (esp.equals("nutricao")) {
+            profissionais[totalProfissionais] =
+                new Nutricionista(nome, cpf);
+        }
+        else if (esp.equals("fisioterapia")) {
+            profissionais[totalProfissionais] =
+                new Fisioterapeuta(nome, cpf);
+        }
+        
+        else {
+            profissionais[totalProfissionais] = 
+                new ClinicoGeral(nome, cpf);
+        }
+    }
+
+    else if (tipo == 2) {
+        System.out.print("Registro: ");
+        String reg = sc.nextLine();
+        System.out.print("Valor consulta: ");
+        double valor = Double.parseDouble(sc.nextLine());
+            
+        if (esp.equals("psicologia")) {
+            profissionais[totalProfissionais] =
+                new Psicologo(nome, cpf, reg, valor);
+           }
+        
+        else if (esp.equals("nutricao")) {
+            profissionais[totalProfissionais] =
+                new Nutricionista(nome, cpf, reg, valor);
+        }
+        else if (esp.equals("fisioterapia")) {
+            profissionais[totalProfissionais] =
+                new Fisioterapeuta(nome, cpf, reg, valor);
+        }
+            
+        else {
+            profissionais[totalProfissionais] = 
+                new ClinicoGeral(nome, cpf, reg, valor);
+        }
+        }
+        else {
             System.out.print("Registro: ");
             String reg = sc.nextLine();
             System.out.print("Valor consulta: ");
@@ -240,7 +278,25 @@ public class Main {
                 System.out.print("Dia " + (i+1) + ": ");
                 dias[i] = sc.nextLine();
             }
-            profissionais[totalProfissionais] = new Profissional(nome, cpf, esp, reg, valor, dias, qtd);
+        if (esp.equals("psicologia")) {
+            profissionais[totalProfissionais] =
+                new Psicologo(nome, cpf, reg, valor, dias, qtd);
+           }
+        
+        else if (esp.equals("nutricao")) {
+            profissionais[totalProfissionais] =
+                new Nutricionista(nome, cpf, reg, valor, dias, qtd);
+        }
+
+        else if (esp.equals("fisioterapia")) {
+            profissionais[totalProfissionais] =
+                new Fisioterapeuta(nome, cpf, reg, valor, dias, qtd);
+        }
+            
+        else {
+            profissionais[totalProfissionais] = 
+                new ClinicoGeral(nome, cpf, reg, valor, dias, qtd);
+        }
         }
         totalProfissionais++;
         System.out.println("Profissional cadastrado!");
