@@ -5,7 +5,6 @@
 
     public class Main {
 
-        //Agora e uma arraylist, e n um array (commit antigo mas recolocado, pois dei commit em outro repositorio)
         static ArrayList<Pagamento> pagamentos = new ArrayList<>();
         
         static Scanner sc = new Scanner(System.in);
@@ -147,9 +146,9 @@
             }
         }
         //PRIMEIRA FUNCAO DO pagamentoDireto()
-    public static void pagamentoDireto() {
-        System.out.print("Indice da consulta: ");
-        int idxConsulta = Integer.parseInt(sc.nextLine());
+        public static void pagamentoDireto() {
+            System.out.print("Indice da consulta: ");
+            int idxConsulta = Integer.parseInt(sc.nextLine());
 
         // Validação simples para evitar indice invalido
         if (idxConsulta < 0 || idxConsulta >= totalConsultas) {
@@ -167,10 +166,74 @@
 
         Pagamento pagamento;
 
-        //se for cartao
-        // if (tipoPag.equals("cartao")) vou add no prox commit
+        // se for cartao (add completo no commit)
+        if (tipoPag.equals("cartao")) {
 
-    }
+            System.out.print("Parcelas (1 a 3): ");
+            int parc = Integer.parseInt(sc.nextLine());
+
+            pagamento = new PagamentoCartao(idxConsulta, valor, tipoPag, parc);
+
+        } else if (tipoPag.equals("dinheiro")) {
+
+            pagamento = new PagamentoDinheiro(idxConsulta, valor, tipoPag);
+
+        } else {
+            pagamento = new PagamentoConvenio(idxConsulta, valor, tipoPag);
+        }
+        pagamentos.add(pagamento);
+        System.out.println(pagamento.exibirResumo());
+        System.out.println("Pagamento registrado!");
+
+        }
+        
+        // estruturando metodo 
+        public static void pagamentoAutomatico() {
+            System.out.print("Indice da consulta: ");
+            int idxConsulta = Integer.parseInt(sc.nextLine());
+
+            // Validação básica pra evitar acessar posição inválida do arraylist
+            if (idxConsulta < 0 || idxConsulta >= totalConsultas) {
+                System.out.println("Indice invalido.");
+            return;
+            }
+
+            String nomeProf = consultas[idxConsulta].nomeProfissional;
+            int idxProf = buscarIndiceProfissional(nomeProf);
+            double valorBase = profissionais[idxProf].valorConsulta;
+
+            String cpfPac = consultas[idxConsulta].cpfPaciente;
+            int idxPac = buscarIndicePaciente(cpfPac);
+
+            boolean temConvenio = !pacientes[idxPac].convenioNome.equals("");
+            boolean ehRetorno = consultas[idxConsulta].tipo.equals("retorno");
+
+            double desconto = 0;
+            if (ehRetorno) desconto += 20;
+            if (temConvenio) desconto += 40;
+
+            double valorFinal = valorBase * (1 - desconto / 100.0);
+
+            System.out.print("Tem multa pendente? (1-Nao / 2-Sim): ");
+            int temMulta = Integer.parseInt(sc.nextLine());
+
+            if (temMulta == 2) {
+                
+            }
+
+            System.out.print("Tipo (dinheiro/cartao/convenio): ");
+            String tipoPag = sc.nextLine();
+            Pagamento pagamento;
+
+            if (tipoPag.equals("cartao")) {
+
+            } else if (tipoPag.equals("dinheiro")) {
+
+            } else {
+
+            }
+
+        }
 
            // ---- ATENDIMENTOS ----
 
@@ -185,7 +248,7 @@
 
                 if (op == 1) ClinicaServico.registrarAtendimento();
             }
-    }
+        }
 
         // ---- RELATORIOS ----
 
