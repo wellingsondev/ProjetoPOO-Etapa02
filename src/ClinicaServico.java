@@ -580,6 +580,10 @@ public class ClinicaServico {
                 System.out.print("Dia " + (i+1) + ": ");
                 dias[i] = sc.nextLine();
             }
+            if (esp.equals("fisioterapia")) {
+             System.out.print("Quantidade padrão de sessões: ");
+            int sessoes = Integer.parseInt(sc.nextLine());
+            
             profissionais[totalProfissionais] = new Profissional(nome, esp, reg, valor, dias, qtd);
         }
         totalProfissionais++;
