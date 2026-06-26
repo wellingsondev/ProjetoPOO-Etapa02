@@ -5,6 +5,7 @@
         private double valorConsulta;
         private String[] diasDisponiveis;
         private int totalDias;
+        private String abordagemTerapeutica; // abordagem utilizada pelo psicólogo
         private int quantidadeSessoesPadrao; // quantidade padrão de sessões para fisioterapia
 
         // so nome e especialidade
@@ -15,6 +16,7 @@
             this.valorConsulta = 0;
             this.diasDisponiveis = new String[7];
             this.totalDias = 0;
+            this.abordagemTerapeutica = "";
             this.quantidadeSessoesPadrao = 0; // inicializa a quantidade de sessões padrão
         }
 
@@ -25,6 +27,8 @@
             this.valorConsulta = valorConsulta;
             this.diasDisponiveis = new String[7];
             this.totalDias = 0;
+            this.abordagemTerapeutica = "";
+            this.quantidadeSessoesPadrao = 0;
         }
 
         // construtor completo com dias
@@ -35,6 +39,8 @@
             this.registroProfissional = registroProfissional;
             this.valorConsulta = valorConsulta;
             this.diasDisponiveis = new String[7];
+            this.abordagemTerapeutica = "";
+            this.quantidadeSessoesPadrao = 0;
             this.totalDias = totalDias;
             for (int i = 0; i < totalDias; i++) {
                 this.diasDisponiveis[i] = dias[i];
@@ -80,6 +86,11 @@
                 if (i > 0) dias = dias + ", ";
                 dias = dias + diasDisponiveis[i];
             }
+            // Exibe a abordagem terapêutica quando a especialidade for psicologia
+            if (especialidade.equals("psicologia")) {
+            return "Nome: " + nome + " | Espec: " + especialidade + " | Reg: " + registroProfissional
+                + " | Valor: R$" + valorConsulta + " | Dias: " + dias + " | Abordagem: " + abordagemTerapeutica;
+}
         // Exibe sessões padrão quando a especialidade for fisioterapia
             if (especialidade.equals("fisioterapia")) {
             return "Nome: " + nome + " | Espec: " + especialidade  + " | Reg: " + registroProfissional
@@ -114,5 +125,13 @@
         // Define a quantidade de sessões padrão para fisioterapia
         public void setQuantidadeSessoesPadrao(int quantidadeSessoesPadrao) {
         this.quantidadeSessoesPadrao = quantidadeSessoesPadrao;
-    }
+        }
+        // retorna a abordagem terapêutica
+        public String getAbordagemTerapeutica() {
+        return abordagemTerapeutica;
+        }
+        // define a abordagem terapêutica
+        public void setAbordagemTerapeutica(String abordagemTerapeutica) {
+         this.abordagemTerapeutica = abordagemTerapeutica;
+}
 }
