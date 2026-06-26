@@ -759,7 +759,7 @@ public class ClinicaServico {
     Consulta consulta = consultas.get(idxConsulta);
 
     String nomeProf = consulta.getNomeProfissional();
-    int idxProf = Relatorio.buscarIndiceProfissional(nomeProf, profissionais);
+    int idxProf = buscarIndiceProfissional(nomeProf, profissionais);
 
     if (idxProf == -1) {
         System.out.println("Profissional não encontrado.");
@@ -770,7 +770,7 @@ public class ClinicaServico {
 
     // paciente
     String cpfPac = consulta.getCpfPaciente();
-    int idxPac = Relatorio.buscarIndicePaciente(cpfPac, pacientes);
+    int idxPac = buscarIndicePaciente(cpfPac, pacientes);
 
     if (idxPac == -1) {
         System.out.println("Paciente não encontrado.");

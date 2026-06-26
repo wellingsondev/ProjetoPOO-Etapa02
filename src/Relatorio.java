@@ -1,12 +1,6 @@
-
 import java.util.List;
-
 public class Relatorio {
-    //17:33 mudancas em coisas q n  envolvem a logica, mas sim o uso de arraylists para se adaptar a estrutura do codigo inteiro
-
-    // mostra todas as consultas
-    public static void gerarRelatorio(List<Consulta> consultas,
-                                  List<Atendimento> atendimentos) {
+    public static void gerarRelatorio(List<Consulta> consultas, List<Atendimento> atendimentos) {
 
         System.out.println("\n=== RELATORIO GERAL ===");
        for (int i = 0; i < consultas.size(); i++) {
@@ -19,26 +13,6 @@ public class Relatorio {
             System.out.println("---");
         }
     }
-
-    //necessario pra pagamentoAutomatico(), feito nesse commit por paulo-victor1
-    public static int buscarIndiceProfissional(String nome, List<Profissional> profissionais) {
-    for (int i = 0; i < profissionais.size(); i++) {
-        if (profissionais.get(i).getNome().equals(nome)) {
-            return i;
-        }
-    }
-    return -1;
-    }
-    //necessario pra pagamentoAutomatico(), feito nesse commit por paulo-victor1
-    public static int buscarIndicePaciente(String cpf, List<Paciente> pacientes) {
-    for (int i = 0; i < pacientes.size(); i++) {
-        if (pacientes.get(i).getCpf().equals(cpf)) {
-            return i;
-        }
-    }
-    return -1;
-}
-
     // filtra por profissional
     public static void gerarRelatorio(List<Consulta> consultas, List<Atendimento> atendimentos, String nomeProfissional) {
 
