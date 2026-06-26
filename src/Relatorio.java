@@ -1,11 +1,13 @@
-import java.util.ArrayList;
+
+import java.util.List;
 
 public class Relatorio {
     //17:33 mudancas em coisas q n  envolvem a logica, mas sim o uso de arraylists para se adaptar a estrutura do codigo inteiro
 
     // mostra todas as consultas
-    public static void gerarRelatorio(ArrayList<Consulta> consultas,
-                                  ArrayList<Atendimento> atendimentos) {
+    public static void gerarRelatorio(List<Consulta> consultas,
+                                  List<Atendimento> atendimentos) {
+
         System.out.println("\n=== RELATORIO GERAL ===");
        for (int i = 0; i < consultas.size(); i++) {
             System.out.println(consultas.get(i).exibirResumo());
@@ -19,7 +21,7 @@ public class Relatorio {
     }
 
     //necessario pra pagamentoAutomatico(), feito nesse commit por paulo-victor1
-    public static int buscarIndiceProfissional(String nome, ArrayList<Profissional> profissionais) {
+    public static int buscarIndiceProfissional(String nome, List<Profissional> profissionais) {
     for (int i = 0; i < profissionais.size(); i++) {
         if (profissionais.get(i).getNome().equals(nome)) {
             return i;
@@ -28,7 +30,7 @@ public class Relatorio {
     return -1;
     }
     //necessario pra pagamentoAutomatico(), feito nesse commit por paulo-victor1
-    public static int buscarIndicePaciente(String cpf, ArrayList<Paciente> pacientes) {
+    public static int buscarIndicePaciente(String cpf, List<Paciente> pacientes) {
     for (int i = 0; i < pacientes.size(); i++) {
         if (pacientes.get(i).getCpf().equals(cpf)) {
             return i;
@@ -38,7 +40,7 @@ public class Relatorio {
 }
 
     // filtra por profissional
-    public static void gerarRelatorio(ArrayList<Consulta> consultas, ArrayList<Atendimento> atendimentos, String nomeProfissional) {
+    public static void gerarRelatorio(List<Consulta> consultas, List<Atendimento> atendimentos, String nomeProfissional) {
 
         System.out.println("\n==== RELATORIO - " + nomeProfissional + " ====");
         boolean achou = false;
@@ -59,7 +61,7 @@ public class Relatorio {
     }
 
     // filtra por periodo (data inicio e fim)
-    public static void gerarRelatorio(ArrayList<Consulta> consultas, ArrayList<Atendimento> atendimentos, String dataInicio, String dataFim) {
+    public static void gerarRelatorio(List<Consulta> consultas, List<Atendimento> atendimentos, String dataInicio, String dataFim) {
 
         System.out.println("\n=== RELATORIO - " + dataInicio + " a " + dataFim + " ===");
         for (int i = 0; i < consultas.size(); i++) {
@@ -75,16 +77,12 @@ public class Relatorio {
     }
 
     // resumo financeiro do dia foi mudado pra adaptarse ao arraylist
-    public static void gerarResumoFinanceiro(
-        ArrayList<Consulta> consultas,
-        ArrayList<Pagamento> pagamentos,
-        double[] multas,
-        int totalMultas) {
+    public static void gerarResumoFinanceiro( List<Consulta> consultas, List<Pagamento> pagamentos, double[] multas, int totalMultas) {
 
-    int realizadas = 0;
-    int canceladas = 0;
-    double totalFaturado = 0;
-    double totalEmMultas = 0;
+        int realizadas = 0;
+        int canceladas = 0;
+        double totalFaturado = 0;
+        double totalEmMultas = 0;
 
     for (int i = 0; i < consultas.size(); i++) {
 
@@ -112,7 +110,7 @@ public class Relatorio {
     System.out.println("Total em multas: R$" + Math.round(totalEmMultas * 100.0) / 100.0);
 }
     // busca diagnostico de um atendimento pelo indice da consulta att para se adaptar a arraylist
-    public static String buscarDiagnostico(int indiceConsulta, ArrayList<Atendimento> atendimentos) {
+    public static String buscarDiagnostico(int indiceConsulta, List<Atendimento> atendimentos) {
 
     for (int i = 0; i < atendimentos.size(); i++) {
         if (atendimentos.get(i).getIndiceConsulta() == indiceConsulta) {

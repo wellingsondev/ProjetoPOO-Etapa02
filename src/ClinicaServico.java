@@ -1,17 +1,16 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.Scanner;
 
 public class ClinicaServico {
     
-    private static ArrayList<Paciente> pacientes = new ArrayList<>();
-    private static ArrayList<Profissional> profissionais = new ArrayList<>();
+    private static List<Paciente> pacientes = new ArrayList<>();
+    private static List<Profissional> profissionais = new ArrayList<>();
 
-    private static ArrayList<Consulta> consultas = new ArrayList<>();
-    private static ArrayList<Atendimento> atendimentos = new ArrayList<>();
-    private static ArrayList<Pagamento> pagamentos = new ArrayList<>();
+    private static List<Consulta> consultas = new ArrayList<>();
+    private static List<Atendimento> atendimentos = new ArrayList<>();
+    private static List<Pagamento> pagamentos = new ArrayList<>();
     static Scanner sc = new Scanner(System.in);
 
 
@@ -689,7 +688,6 @@ public class ClinicaServico {
             }
 
             consultas.get(idxConsulta).realizar();
-   
             System.out.println("\n--- RESUMO ---");
             System.out.println(atendimentos.get(atendimentos.size() -1).exibirResumo());
             System.out.println("Consulta marcada como realizada.");
@@ -700,7 +698,7 @@ public class ClinicaServico {
         int idxConsulta = Integer.parseInt(sc.nextLine());
 
         // Validação simples para evitar indice invalido (eu mudei o if pq n tava compativel com ArrL)
-       if (idxConsulta < 0 || idxConsulta >= consultas.size()) {
+        if (idxConsulta < 0 || idxConsulta >= consultas.size()) {
             System.out.println("Indice invalido.");
             return;
         }
@@ -713,24 +711,34 @@ public class ClinicaServico {
         System.out.print("Tipo (dinheiro/cartao/convenio): ");
         String tipoPag = sc.nextLine();
 
-        Pagamento pagamento;
+        Pagamento pagamento = null;
 
         // se for cartao (add completo no commit)
         if (tipoPag.equals("cartao")) {
 
             System.out.print("Parcelas (1 a 3): ");
             int parc = Integer.parseInt(sc.nextLine());
-
             pagamento = new PagamentoCartao(idxConsulta, valor, tipoPag, parc);
+            pagamentos.add(pagamento);
 
         } else if (tipoPag.equals("dinheiro")) {
 
             pagamento = new PagamentoDinheiro(idxConsulta, valor, tipoPag);
+            pagamentos.add(pagamento);
 
-        } else {
-            pagamento = new PagamentoConvenio(idxConsulta, valor, tipoPag);
+        } else if (tipoPag.equals("convenio")) {
+
+            System.out.print("Nome do convênio: ");
+            String nomeConvenio = sc.nextLine();
+
+            System.out.print("Percentual de desconto: ");
+            double percentualDesconto = Double.parseDouble(sc.nextLine());
+
+            pagamento = new PagamentoConvenio(idxConsulta, valor, tipoPag, nomeConvenio, percentualDesconto);
+
+            pagamentos.add(pagamento);
+
         }
-        pagamentos.add(pagamento);
         System.out.println(pagamento.exibirResumo());
         System.out.println("Pagamento registrado!");
 
@@ -797,20 +805,29 @@ public class ClinicaServico {
         System.out.print("Parcelas (1 a 3): ");
         int parc = Integer.parseInt(sc.nextLine());
 
-        pagamento = new PagamentoCartao(idxConsulta, valorFinal, tipoPag, parc);
+        pagamentos.add(new PagamentoCartao(idxConsulta, valorFinal, tipoPag, parc));
 
     } else if (tipoPag.equals("dinheiro")) {
 
-        pagamento = new PagamentoDinheiro(idxConsulta, valorFinal, tipoPag);
+        pagamentos.add(new PagamentoDinheiro(idxConsulta, valorFinal, tipoPag));
 
-    } else {
+    } else if (tipoPag.equals("convenio")) {
 
-        pagamento = new PagamentoConvenio(idxConsulta, valorFinal, tipoPag);
+        System.out.print("Nome do convênio: ");
+        String nomeConvenio = sc.nextLine();
+
+        System.out.print("Percentual de desconto: ");
+        double percentualDesconto = Double.parseDouble(sc.nextLine());
+
+        pagamentos.add(new PagamentoConvenio(idxConsulta, valorFinal, tipoPag, nomeConvenio, percentualDesconto));
+
+    }else{
+        
+        System.out.println("Tipo de pagamento invalido!");
+        return;
     }
 
-    pagamentos.add(pagamento);
-
-    System.out.println(pagamento.exibirResumo());
+    System.out.println("Pagamento registrado com sucesso!");
 }
     
 
