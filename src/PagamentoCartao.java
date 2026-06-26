@@ -1,20 +1,23 @@
 public class PagamentoCartao extends Pagamento {
 
-
     public PagamentoCartao(int indiceConsulta,
-                           double valor,
+                           double valorFinal,
+                           String tipoPagamento,
                            int parcelas){
 
-        super(indiceConsulta,
-              valor,
-              "Cartao",
-              parcelas);
+        super(indiceConsulta, valorFinal, tipoPagamento, parcelas);
+    }
+
+
+    @Override
+    public double calcularValorFinal() {
+        return this.valorFinal * 0.90;
     }
 
 
     public double calcularParcela(){
 
-        return valorFinal / parcelas;
+        return calcularValorFinal() / parcelas;
 
     }
 

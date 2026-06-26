@@ -1,26 +1,37 @@
 public class PagamentoConvenio extends Pagamento {
 
-    private double cobertura;
+    private String nomeConvenio;
+    private double percentualDesconto;
 
 
-    public PagamentoConvenio(
-            int indiceConsulta,
-            double valor,
-            double cobertura){
+    public PagamentoConvenio(int indiceConsulta,
+                             double valorFinal,
+                             String tipoPagamento,
+                             String nomeConvenio,
+                             double percentualDesconto) {
 
-        super(indiceConsulta,
-              valor,
-              "Convenio");
+        super(indiceConsulta, valorFinal, tipoPagamento);
 
-        this.cobertura = cobertura;
+        this.nomeConvenio = nomeConvenio;
+        this.percentualDesconto = percentualDesconto;
     }
 
 
-    public double calcularValorPaciente(){
+    @Override
+    public double calcularValorFinal() {
 
-        return valorFinal -
-              (valorFinal * cobertura / 100);
+        return this.valorFinal * 
+               (1 - percentualDesconto / 100);
 
     }
 
+
+    public String getNomeConvenio() {
+        return nomeConvenio;
+    }
+
+
+    public double getPercentualDesconto() {
+        return percentualDesconto;
+    }
 }

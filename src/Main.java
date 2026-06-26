@@ -175,22 +175,22 @@
 
                 switch (op) {
                     case 1:
-                        Relatorio.gerarRelatorio(consultas, totalConsultas, atendimentos, totalAtendimentos);
+                         Relatorio.gerarRelatorio(consultas, atendimentos);
                         break;
                     case 2:
                         System.out.print("Nome do profissional: ");
                         String nome = sc.nextLine();
-                        Relatorio.gerarRelatorio(consultas, totalConsultas, atendimentos, totalAtendimentos, nome);
+                        Relatorio.gerarRelatorio(consultas, atendimentos, nome);
                         break;
                     case 3:
                         System.out.print("Data inicio (DD/MM/AAAA): ");
                         String ini = sc.nextLine();
                         System.out.print("Data fim (DD/MM/AAAA): ");
                         String fim = sc.nextLine();
-                        Relatorio.gerarRelatorio(consultas, totalConsultas, atendimentos, totalAtendimentos, ini, fim);
+                        Relatorio.gerarRelatorio(consultas, atendimentos, ini, fim);
                         break;
                     case 4:
-                        Relatorio.gerarResumoFinanceiro(consultas, totalConsultas, pagamentos, totalPagamentos, multas, totalMultas);
+                        Relatorio.gerarResumoFinanceiro(consultas, pagamentos, multas, totalMultas);
                         break;
                     case 0: break;
                     default: System.out.println("Opcao invalida!"); break;

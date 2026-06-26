@@ -1,6 +1,7 @@
 import java.util.Date;
 
-abstract class Pessoa {
+public abstract class Pessoa {
+
     private String nome;
     private String cpf;
     private String telefone;
@@ -15,28 +16,26 @@ abstract class Pessoa {
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
     public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
     public String getTelefone() {
         return telefone;
     }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public Date getNascimento() {
+        return nascimento;
+    }
+
     public void setNascimento(Date nascimento) {
         this.nascimento = nascimento;
     }
-    public Date getNascimento() {
-        return nascimento;      
-    }
-    public abstract void exibirResumo();
+
+    public abstract String exibirResumo();
+
 }

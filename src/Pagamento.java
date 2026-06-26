@@ -1,8 +1,8 @@
-public class Pagamento {
-    public int indiceConsulta;
-    public double valorFinal;
-    public String tipoPagamento;
-    public int parcelas;
+public abstract class Pagamento {
+    protected int indiceConsulta;
+    protected double valorFinal;
+    protected String tipoPagamento;
+    protected int parcelas;
 
     public Pagamento(int indiceConsulta, double valorFinal, String tipoPagamento) {
         this.indiceConsulta = indiceConsulta;
@@ -55,4 +55,19 @@ public class Pagamento {
         }
         return resumo;
     }
+
+    public int getIndiceConsulta() {
+        return indiceConsulta;
+    }
+    public double getValorFinal() {
+        return valorFinal;
+    }
+    public String getTipoPagamento() {
+        return tipoPagamento;
+    }
+    public int getParcelas() {
+        return parcelas;
+    }
+    
+    public abstract double calcularValorFinal();
 }

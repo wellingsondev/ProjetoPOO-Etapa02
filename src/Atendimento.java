@@ -73,4 +73,13 @@ public class Atendimento {
         }
         return resumo;
     }
+
+    //paulo-victor1 _ relatorio precisava dos geters 
+    public int getIndiceConsulta() {
+    return indiceConsulta;
+    }
+
+    public String getDiagnostico() {
+    return diagnostico;
+    }
 }
