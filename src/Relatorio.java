@@ -77,8 +77,7 @@ public class Relatorio {
     }
 
     // resumo financeiro do dia foi mudado pra adaptarse ao arraylist
-    public static void gerarResumoFinanceiro( List<Consulta> consultas, List<Pagamento> pagamentos, double[] multas, int totalMultas) {
-
+    public static void gerarResumoFinanceiro(List<Consulta> consultas, List<Pagamento> pagamentos) {
         int realizadas = 0;
         int canceladas = 0;
         double totalFaturado = 0;
@@ -99,9 +98,11 @@ public class Relatorio {
         totalFaturado += pagamentos.get(i).calcularValorFinal();
     }
 
-    for (int i = 0; i < totalMultas; i++) {
-        totalEmMultas += multas[i];
+    for (Consulta consulta : consultas) {
+    for (Double multa : consulta.getMultas()) {
+        totalEmMultas += multa;
     }
+}
 
     System.out.println("\n=== RESUMO FINANCEIRO ===");
     System.out.println("Atendimentos realizados: " + realizadas);

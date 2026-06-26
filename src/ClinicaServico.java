@@ -798,8 +798,6 @@ public class ClinicaServico {
     System.out.print("Tipo (dinheiro/cartao/convenio): ");
     String tipoPag = sc.nextLine();
 
-    Pagamento pagamento;
-
     if (tipoPag.equals("cartao")) {
 
         System.out.print("Parcelas (1 a 3): ");
@@ -829,16 +827,47 @@ public class ClinicaServico {
 
     System.out.println("Pagamento registrado com sucesso!");
 }
-    
-
-
     public static void listarPagamentos() {
-            if (pagamentos.isEmpty()) {
-                System.out.println("Nenhum pagamento registrado.");
-                return;
-            }
-            for (int i = 0; i < pagamentos.size(); i++) {
-                System.out.println(pagamentos.get(i).exibirResumo());
-            }
+        if (pagamentos.isEmpty()) {
+            System.out.println("Nenhum pagamento registrado.");
+            return;
         }
+        for (int i = 0; i < pagamentos.size(); i++) {
+            System.out.println(pagamentos.get(i).exibirResumo());
+        }
+    }
+    //relatorio
+    public static void gerarResumoFinanceiro() {
+        Relatorio.gerarResumoFinanceiro(consultas, pagamentos);
+    }
+    public static void gerarRelatorioGeral() {
+        Relatorio.gerarRelatorio(consultas, atendimentos);
+    }
+
+    public static void gerarRelatorioPorProfissional(String nome) {
+        Relatorio.gerarRelatorio(consultas, atendimentos, nome);
+    }   
+
+    public static void gerarRelatorioPorPeriodo(String inicio, String fim) {
+        Relatorio.gerarRelatorio(consultas, atendimentos, inicio, fim);
+    }
+    //movi do relatorio pra aqui.
+    public static int buscarIndiceProfissional(String nome, List<Profissional> profissionais) {
+    for (int i = 0; i < profissionais.size(); i++) {
+        if (profissionais.get(i).getNome().equals(nome)) {
+            return i;
+        }
+    }
+    return -1;
+    }
+    //movi do relatoria pra acula
+    public static int buscarIndicePaciente(String cpf, List<Paciente> pacientes) {
+    for (int i = 0; i < pacientes.size(); i++) {
+        if (pacientes.get(i).getCpf().equals(cpf)) {
+            return i;
+        }
+    }
+    return -1;
+    }
 }
+
