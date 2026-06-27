@@ -69,8 +69,18 @@ public class ClinicaServico {
                         System.out.println("ERRO: Você digitou um valor inválido. Digite apenas números para a idade.");
                     }
                 }
-                System.out.println("Digite o numero do paciente: ");
-                String lerTelefone = sc.nextLine();
+                String lerTelefone = "";
+                boolean telValido = false;
+                while (!telValido) {
+                    System.out.print("Digite o telefone do paciente: ");
+                    lerTelefone = sc.nextLine();
+                    //Esse regex "\\d+" aceita uma ou mais ocorrências de dígitos (0 a 9).
+                    if (lerTelefone.matches("\\d+")) {
+                        telValido = true;
+                    } else {
+                        System.out.println("Telefone deve conter apenas números. Tente novamente.");
+                    }
+                }
 
                 pacientes.add(new Paciente(nome, cpf, lerIdade, lerTelefone));
                 System.out.println("Paciente cadastrado com sucesso!");
@@ -96,8 +106,20 @@ public class ClinicaServico {
                     }
                 }
 
-                System.out.println("Digite o numero do paciente: ");
-                String lerTelefone = sc.nextLine();
+                //===== LER NUMERO DE TELEFONE DO PACIENTE =====
+                String lerTelefone = "";
+                boolean telValido = false;
+                while (!telValido) {
+                    System.out.print("Digite o telefone do paciente: ");
+                    lerTelefone = sc.nextLine();
+
+                    //Esse regex "\\d+" aceita uma ou mais ocorrências de dígitos (0 a 9).
+                    if (lerTelefone.matches("\\d+")) {
+                        telValido = true;
+                    } else {
+                        System.out.println("Telefone deve conter apenas números. Tente novamente.");
+                    }
+                }
                 System.out.println("Digite o covênio do paciente: ");
                 String lerConvenio = sc.nextLine();
 
