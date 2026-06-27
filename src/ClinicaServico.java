@@ -289,6 +289,14 @@ public class ClinicaServico {
         );
     }
     }
+    Profissional profissional = profissionais.get(profissionais.size() - 1);
+    
+    if (profissional instanceof Fisioterapeuta) {
+        System.out.print("Quantidade de sessões por paciente: ");
+        int sessoes = Integer.parseInt(sc.nextLine());
+        ((Fisioterapeuta) profissional).setQuantidadeSessoes(sessoes);
+        System.out.println(profissional.exibirResumo());
+    }
 
     System.out.println("Profissional cadastrado!");
 }
