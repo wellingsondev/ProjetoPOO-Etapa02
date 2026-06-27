@@ -901,13 +901,34 @@ public class ClinicaServico {
 
     } else if (tipoPag.equals("convenio")) {
 
-        System.out.print("Nome do convênio: ");
+        System.out.print("Nome do convênio: "); 
         String nomeConvenio = sc.nextLine();
 
+        String especialidade = profissionais.get(idxProf).getEspecialidade();
+
+    if (!convenioCobreEspecialidade(nomeConvenio, especialidade)) { // valida se o convênio cobre
+        System.out.println("Convênio não cobre a especialidade " + especialidade + ".");
+        System.out.println("Selecione outra forma de pagamento.");
+
+        System.out.print("Nova forma (dinheiro/cartao): ");
+        String novaForma = sc.nextLine();
+
+    if (novaForma.equals("dinheiro")) {
+        pagamentos.add(new PagamentoDinheiro(idxConsulta, valorFinal, novaForma));
+    } else if (novaForma.equals("cartao")) {
+        System.out.print("Parcelas (1 a 3): ");
+        int parc = Integer.parseInt(sc.nextLine());
+        pagamentos.add(new PagamentoCartao(idxConsulta, valorFinal, novaForma, parc));
+    } else {
+        System.out.println("Forma de pagamento invalida.");
+        return;
+    }
+        } else {
         System.out.print("Percentual de desconto: ");
         double percentualDesconto = Double.parseDouble(sc.nextLine());
 
         pagamentos.add(new PagamentoConvenio(idxConsulta, valorFinal, tipoPag, nomeConvenio, percentualDesconto));
+}
 
     }else{
         
@@ -958,6 +979,21 @@ public class ClinicaServico {
         }
     }
     return -1;
+    }
+
+    public static boolean convenioCobreEspecialidade(String nomeConvenio, String especialidade) {
+    if (nomeConvenio.equals("Unimed")) {
+        return especialidade.equals("clinica geral") || especialidade.equals("psicologia");
+    }
+
+    if (nomeConvenio.equals("Hapvida")) {
+        return especialidade.equals("clinica geral") || especialidade.equals("fisioterapia");
+    }
+
+    if (nomeConvenio.equals("Bradesco")) {
+        return especialidade.equals("clinica geral") || especialidade.equals("psicologia") || especialidade.equals("nutricao");
+    }
+    return false;
     }
 }
 
