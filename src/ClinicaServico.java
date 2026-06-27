@@ -87,7 +87,7 @@ public class ClinicaServico {
 
                 Paciente p = new Paciente(nome, cpf, lerIdade, lerTelefone);
                 pacientes.add(p);
-                todasPessoas.add(p); // <-- ADICIONA
+                todasPessoas.add(p);
                 System.out.println("Paciente cadastrado com sucesso!");
 
             } else if (tipo == 3) {
@@ -224,16 +224,24 @@ public class ClinicaServico {
     if (tipo == 1) {
 
     if (esp.equals("psicologia")) {
-        profissionais.add(new Psicologo(nome, cpf));
+        Psicologo prof = new Psicologo(nome, cpf);
+        profissionais.add(prof);
+        todasPessoas.add(prof);
     }
     else if (esp.equals("nutricao")) {
-        profissionais.add(new Nutricionista(nome, cpf));
+        Nutricionista prof = new Nutricionista(nome, cpf);
+        profissionais.add(prof);
+        todasPessoas.add(prof);
     }
     else if (esp.equals("fisioterapia")) {
-        profissionais.add(new Fisioterapeuta(nome, cpf));
+        Fisioterapeuta prof = new Fisioterapeuta(nome, cpf);
+        profissionais.add(prof);
+        todasPessoas.add(prof);
     }
     else {
-        profissionais.add(new ClinicoGeral(nome, cpf));
+        ClinicoGeral prof = new ClinicoGeral(nome, cpf);
+        profissionais.add(prof);
+        todasPessoas.add(prof);
     }
     }
 
