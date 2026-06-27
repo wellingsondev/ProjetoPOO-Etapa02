@@ -955,5 +955,60 @@ public class ClinicaServico {
     }
     return -1;
     }
-}
+
+    //===== Gera o relatório geral de todos os cadastros no sistema =====
+
+    public static void gerarRelatorioUnificado(){
+        System.out.println("\n=== RELATÓRIO UNIFICADO DE CADASTROS ===");
+        if (todasPessoas.isEmpty()) {
+            System.out.println("Nenhuma pessoa cadastrada no sistema.");
+            return;
+        }
+
+        System.out.println("=== TODOS OS CADASTROS ===");
+        int contador = 1;
+
+        for (Pessoa pessoa : todasPessoas) {
+            System.out.println(contador + ".");
+            System.out.println(pessoa.exibirResumo());
+            System.out.println("---");
+            contador++;
+        }
+
+        System.out.println("\n=== PACIENTES ===");
+        contador = 1;
+        int totalPacientes = 0;
+
+        for (Pessoa pessoa : todasPessoas) {
+            if (pessoa instanceof Paciente) {
+                System.out.println(contador + ".");
+                System.out.println(pessoa.exibirResumo());
+                System.out.println("---");
+                contador++;
+                totalPacientes++;
+            }
+        }
+
+        System.out.println("\n=== PROFISSIONAIS ===");
+        contador = 1;
+        int totalProfissionais = 0;
+
+        for (Pessoa pessoa : todasPessoas) {
+            if (pessoa instanceof Profissional) {
+                System.out.println(contador + ".");
+                System.out.println(pessoa.exibirResumo());
+                System.out.println("---");
+                contador++;
+                totalProfissionais++;
+            }
+        }
+
+        System.out.println("\n=== TOTAIS ===");
+        System.out.println("Total de Pacientes: " + totalPacientes);
+        System.out.println("Total de Profissionais: " + totalProfissionais);
+        System.out.println("Total Geral: " + todasPessoas.size());
+    }
+
+
+    }
 
