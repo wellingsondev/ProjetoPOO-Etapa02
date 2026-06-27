@@ -289,7 +289,7 @@ public class ClinicaServico {
         );
     }
     }
-    Profissional profissional = profissionais.get(profissionais.size() - 1);
+    Profissional profissional = profissionais.get(profissionais.size() - 1);  
     
     if (profissional instanceof Fisioterapeuta) {
         System.out.print("Quantidade de sessões por paciente: ");
@@ -297,7 +297,12 @@ public class ClinicaServico {
         ((Fisioterapeuta) profissional).setQuantidadeSessoes(sessoes);
         System.out.println(profissional.exibirResumo());
     }
-
+    if (profissional instanceof Psicologo) {
+    System.out.print("Abordagem terapêutica: ");
+    String abordagem = sc.nextLine();
+    ((Psicologo) profissional).setAbordagemTerapeutica(abordagem);
+    System.out.println(profissional.exibirResumo());
+}
     System.out.println("Profissional cadastrado!");
 }
 
