@@ -50,9 +50,25 @@ public class ClinicaServico {
             System.out.println("Paciente cadastrado com sucesso!");
 
             } else if (tipo == 2) {
-                System.out.println("Digite a idade do paciente: ");
-                int lerIdade = sc.nextInt();
-                sc.nextLine();
+
+                //===== LER A IDADE DO PACIENTE =====
+                int lerIdade = 0;
+                boolean idadeValida = false;
+
+                //Aqui fiz para validar a idade e nem deixar negativa ou adicionar outro caractere inválido
+                while (!idadeValida) {
+                    try {
+                        System.out.println("Digite a idade do paciente: ");
+                        lerIdade = Integer.parseInt(sc.nextLine());
+                        if (lerIdade < 0) {
+                            System.out.println("Idade não pode ser negativa. Tente novamente.");
+                        } else {
+                            idadeValida = true;
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("ERRO: Você digitou um valor inválido. Digite apenas números para a idade.");
+                    }
+                }
                 System.out.println("Digite o numero do paciente: ");
                 String lerTelefone = sc.nextLine();
 
@@ -60,9 +76,26 @@ public class ClinicaServico {
                 System.out.println("Paciente cadastrado com sucesso!");
 
             } else if (tipo == 3) {
-                System.out.println("Digite a idade do paciente: ");
-                int lerIdade = sc.nextInt();
-                sc.nextLine();
+
+                //===== LER A IDADE DO PACIENTE =====
+                int lerIdade = 0;
+                boolean idadeValida = false;
+
+                //Aqui fiz para validar a idade e nem deixar negativa ou adicionar outro caractere inválido
+                while (!idadeValida) {
+                    try {
+                        System.out.println("Digite a idade do paciente: ");
+                        lerIdade = Integer.parseInt(sc.nextLine());
+                        if (lerIdade < 0) {
+                            System.out.println("Idade não pode ser negativa. Tente novamente.");
+                        } else {
+                            idadeValida = true;
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("ERRO: Você digitou um valor inválido. Digite apenas números para a idade.");
+                    }
+                }
+
                 System.out.println("Digite o numero do paciente: ");
                 String lerTelefone = sc.nextLine();
                 System.out.println("Digite o covênio do paciente: ");
