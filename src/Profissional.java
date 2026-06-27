@@ -1,4 +1,3 @@
-
 public abstract class Profissional extends Pessoa {
 
     private String especialidade;

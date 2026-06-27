@@ -302,7 +302,20 @@ public class ClinicaServico {
         );
     }
     }
-
+    Profissional profissional = profissionais.get(profissionais.size() - 1);  
+    
+    if (profissional instanceof Fisioterapeuta) {
+        System.out.print("Quantidade de sessões por paciente: ");
+        int sessoes = Integer.parseInt(sc.nextLine());
+        ((Fisioterapeuta) profissional).setQuantidadeSessoes(sessoes);
+        System.out.println(profissional.exibirResumo());
+    }
+    if (profissional instanceof Psicologo) {
+    System.out.print("Abordagem terapêutica: ");
+    String abordagem = sc.nextLine();
+    ((Psicologo) profissional).setAbordagemTerapeutica(abordagem);
+    System.out.println(profissional.exibirResumo());
+}
     System.out.println("Profissional cadastrado!");
 }
 
@@ -380,7 +393,7 @@ public class ClinicaServico {
                 return;
             }
             if (!paciente.isAtivo()) {
-                System.out.println("Paciente inativo. Nao e possivel agendar.");
+                System.out.println("Paciente inativo. Agendamento não permitido.");
                 return;
             }
             Profissional prof = null;
@@ -410,24 +423,28 @@ public class ClinicaServico {
             }
 
             // verifica conflito
-            if (temConflito(nomeProf, data, horario)) {
-                System.out.println("Horario ocupado!");
-                String sugestao = sugerirHorario(nomeProf, data);
+          try {
+        if (temConflito(nomeProf, data, horario)) {
+        throw new HorarioIndisponivelException("Horario ocupado!");
+        }
+        } catch (HorarioIndisponivelException e) {
+            System.out.println(e.getMessage());
+            String sugestao = sugerirHorario(nomeProf, data);
+        if (sugestao.equals("")) {
+            System.out.println("Nenhum horario disponivel nesse dia.");
+        return;
+        }
 
-                if (sugestao.equals("")) {
-                    System.out.println("Nenhum horario disponivel nesse dia.");
-                    return;
-                }
-                System.out.println("Sugestao: " + sugestao);
-                System.out.print("Aceita? (1-Sim / 2-Nao): ");
-                int aceita = Integer.parseInt(sc.nextLine());
-                if (aceita == 1) {
-                    horario = sugestao;
-                } else {
-                    return;
-                }
-            }
+        System.out.println("Sugestao: " + sugestao);
+        System.out.print("Aceita? (1-Sim / 2-Nao): ");
+        int aceita = Integer.parseInt(sc.nextLine());
 
+        if (aceita == 1) {
+        horario = sugestao;
+        } else {
+        return;
+        }
+        }
             int infoTipo;
             
 
@@ -467,7 +484,7 @@ public class ClinicaServico {
             return;
         }
         if (!paciente.isAtivo()) {
-            System.out.println("Paciente inativo. Nao e possivel agendar.");
+            System.out.println("Paciente inativo. Agendamento não permitido.");
             return;
         }
 
@@ -509,7 +526,7 @@ public class ClinicaServico {
         String horario = sc.nextLine();
         Consulta cons = null;
         // localiza a consulta
-        
+    
         for (Consulta consuta : consultas) {
             if (consuta.getCpfPaciente().equals(cpf) && consuta.getData().equals(data)
                     && consuta.getHorario().equals(horario)) {
