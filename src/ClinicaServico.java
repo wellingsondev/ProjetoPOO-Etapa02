@@ -19,40 +19,58 @@ public class ClinicaServico {
         String nome = sc.nextLine();
         System.out.print("CPF: ");
         String cpf = sc.nextLine();
-        int tipo;
+        int tipo = 0;
+        boolean tipoInvalido = false;
 
         // verifica se ja existe
         if (buscarIndicePaciente(cpf) != null) {
             System.out.println("CPF ja cadastrado!");
             return;
         }
-        do{
-            System.out.print("Tipo (1-Minimo / 2-Com idade e tel / 3-Completo): ");
-            tipo= Integer.parseInt(sc.nextLine());
-        
-            if (tipo == 1) {
-                pacientes.add(new Paciente(nome, cpf));
+
+        //Refatorei aqui e usei exceção para tentar evitar erro do usuário e o sistema não parar (ass: lucas primo)
+        while (!tipoInvalido){
+            try{
+                System.out.println("Tipo (1-Mínimo / 2-Com idade e tel / 3-Completo):");
+                tipo = Integer.parseInt(sc.nextLine());
+                if (tipo >= 1 && tipo <= 3){
+                    tipoInvalido = true;
+                }else {
+                    System.out.println("Opção inválida. Digite 1, 2 ou 3.");
+                }
+            }
+            catch (NumberFormatException e){
+                System.out.println("ERRO: Você digitou texto. Digite apenas números (1, 2 ou 3).");
+            }
+        }
+
+        if (tipo == 1) {
+
+            pacientes.add(new Paciente(nome, cpf));
+            System.out.println("Paciente cadastrado com sucesso!");
+
             } else if (tipo == 2) {
-                System.out.print("Idade: ");
-                int idade = Integer.parseInt(sc.nextLine());
-                System.out.print("Telefone: ");
-                String tel = sc.nextLine();
+                System.out.println("Digite a idade do paciente: ");
+                int lerIdade = sc.nextInt();
+                sc.nextLine();
+                System.out.println("Digite o numero do paciente: ");
+                String lerTelefone = sc.nextLine();
 
-                pacientes.add(new Paciente(nome, cpf, idade, tel));
+                pacientes.add(new Paciente(nome, cpf, lerIdade, lerTelefone));
+                System.out.println("Paciente cadastrado com sucesso!");
+
             } else if (tipo == 3) {
-                System.out.print("Idade: ");
-                int idade = Integer.parseInt(sc.nextLine());
-                System.out.print("Telefone: ");
-                String tel = sc.nextLine();
-                System.out.print("Convenio: ");
-                String conv = sc.nextLine();
-                pacientes.add(new Paciente(nome, cpf, idade, tel, conv));
-            }else{
-                System.out.println("Tipo invalido! Cadastrando com dados minimos.");
-            
-        }} while (tipo!=1 && tipo!=2 && tipo!=3);
+                System.out.println("Digite a idade do paciente: ");
+                int lerIdade = sc.nextInt();
+                sc.nextLine();
+                System.out.println("Digite o numero do paciente: ");
+                String lerTelefone = sc.nextLine();
+                System.out.println("Digite o covênio do paciente: ");
+                String lerConvenio = sc.nextLine();
 
-        System.out.println("Paciente cadastrado com sucesso!");
+                pacientes.add(new Paciente(nome, cpf, lerIdade, lerTelefone, lerConvenio));
+                System.out.println("Paciente cadastrado com sucesso!");
+        }
     }
 
     public static void complementarPaciente() {
