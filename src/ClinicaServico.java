@@ -4,7 +4,8 @@ import java.util.Set;
 import java.util.Scanner;
 
 public class ClinicaServico {
-    
+
+    private static List<Pessoa> todasPessoas = new ArrayList<>();
     private static List<Paciente> pacientes = new ArrayList<>();
     private static List<Profissional> profissionais = new ArrayList<>();
 
@@ -46,7 +47,9 @@ public class ClinicaServico {
 
         if (tipo == 1) {
 
-            pacientes.add(new Paciente(nome, cpf));
+            Paciente p = new Paciente(nome, cpf);
+            pacientes.add(p);
+            todasPessoas.add(p); // <-- ADICIONA O PACIENTE
             System.out.println("Paciente cadastrado com sucesso!");
 
             } else if (tipo == 2) {
@@ -82,7 +85,9 @@ public class ClinicaServico {
                     }
                 }
 
-                pacientes.add(new Paciente(nome, cpf, lerIdade, lerTelefone));
+                Paciente p = new Paciente(nome, cpf, lerIdade, lerTelefone);
+                pacientes.add(p);
+                todasPessoas.add(p); // <-- ADICIONA
                 System.out.println("Paciente cadastrado com sucesso!");
 
             } else if (tipo == 3) {
