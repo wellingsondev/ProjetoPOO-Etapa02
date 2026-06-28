@@ -1,6 +1,6 @@
 public class Paciente extends Pessoa { 
     private int idade;
-    private String convenioNome;
+    private Convenio convenio;
     private boolean ativo;
 
     public Paciente(String nome, String cpf) {
@@ -8,7 +8,7 @@ public class Paciente extends Pessoa {
 
         this.idade = 0;
         setTelefone("");
-        this.convenioNome = "";
+        this.convenio = null;
         this.ativo = true;
     }
 
@@ -17,16 +17,16 @@ public class Paciente extends Pessoa {
 
         this.idade = idade;
         setTelefone(telefone);
-        this.convenioNome = "";
+        this.convenio = null;
         this.ativo = true;
     }
     // construtor com todos os dados
-    public Paciente(String nome, String cpf, int idade, String telefone, String convenioNome) {
+    public Paciente(String nome, String cpf, int idade, String telefone, Convenio convenio) {
         super(nome, cpf);
 
         this.idade = idade;
         setTelefone(telefone);
-        this.convenioNome = convenioNome;
+        this.convenio = convenio;
         this.ativo = true;
     }
     // atualiza so idade e telefone
@@ -36,10 +36,10 @@ public class Paciente extends Pessoa {
     }
 
     // atualiza tudo incluindo convenio
-    public void complementar(int idade, String telefone, String convenioNome) {
+    public void complementar(int idade, String telefone, Convenio convenio) {
         this.idade = idade;
         setTelefone(telefone);
-        this.convenioNome = convenioNome;
+        this.convenio = convenio;
     }
 
     public void desativar() {
@@ -53,7 +53,7 @@ public class Paciente extends Pessoa {
             status = "Nao";
         }
         return "Nome: " + getNome() + " | CPF: " + getCpf() + " | Idade: " + idade
-                + " | Tel: " + getTelefone() + " | Convenio: " + convenioNome
+                + " | Tel: " + getTelefone() + " | Convenio: " + (convenio != null ? convenio.getNome() : "Nenhum")
                 + " | Ativo: " + status;
     }
 
@@ -61,8 +61,8 @@ public class Paciente extends Pessoa {
         return idade;
     }
 
-    public String getConvenioNome() {
-        return convenioNome;
+    public Convenio getConvenio() {
+        return convenio;
     }
 
     public boolean isAtivo() {
@@ -74,7 +74,7 @@ public class Paciente extends Pessoa {
             this.idade = idade;
         }
     }
-    public void setConvenioNome(String convenioNome) {
-        this.convenioNome = convenioNome;
+    public void setConvenio(Convenio convenio) {
+        this.convenio = convenio;
     }
 }

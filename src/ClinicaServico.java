@@ -127,8 +127,12 @@ public class ClinicaServico {
                 }
                 System.out.println("Digite o covênio do paciente: ");
                 String lerConvenio = sc.nextLine();
+                System.out.println("Digite o percentual de desconto do convênio (0 a 100): ");
+                double percentualDesconto = 0;
+                sc.nextLine(); 
+                Convenio convenio = new Convenio(lerConvenio, percentualDesconto);
 
-                pacientes.add(new Paciente(nome, cpf, lerIdade, lerTelefone, lerConvenio));
+                pacientes.add(new Paciente(nome, cpf, lerIdade, lerTelefone, convenio));
                 System.out.println("Paciente cadastrado com sucesso!");
         }
     }
@@ -156,7 +160,11 @@ public class ClinicaServico {
         } else if (tipo == 2) {
             System.out.print("Convenio: ");
             String conv = sc.nextLine();
-            paciente.complementar(idade, tel, conv);
+            System.out.print("Percentual de desconto do convênio (0 a 100): ");
+            double percentualDesconto = Double.parseDouble(sc.nextLine());
+            sc.nextLine(); 
+            Convenio convenio = new Convenio(conv, percentualDesconto); // Aqui você pode definir o percentual de desconto conforme necessário
+            paciente.complementar(idade, tel, convenio);
         }else{
             System.out.println("Tipo invalido!");
             return;
@@ -817,7 +825,7 @@ public class ClinicaServico {
             return;
         }
 
-        boolean temConvenio = !pacientes.get(idxPac).getConvenioNome().isEmpty();
+        boolean temConvenio = !pacientes.get(idxPac).getConvenio().isEmpty();
         boolean ehRetorno = consulta.getTipo().equals("retorno");
 
         double desconto = 0;
@@ -868,7 +876,9 @@ public class ClinicaServico {
             } else {
                 System.out.print("Percentual de desconto: ");
                 double percentualDesconto = Double.parseDouble(sc.nextLine());
-                pagamentos.add(new PagamentoConvenio(idxConsulta, valorFinal, tipoPag, nomeConvenio, percentualDesconto));
+
+                Convenio convenio = new Convenio(nomeConvenio, percentualDesconto);
+                pagamentos.add(new PagamentoConvenio(idxConsulta, valorFinal, tipoPag, convenio, convenio.getPercentualCobertura()));
             }
         } else {
             System.out.println("Tipo de pagamento invalido!");
@@ -1022,8 +1032,9 @@ public class ClinicaServico {
 
             System.out.print("Percentual de desconto: ");
             double percentualDesconto = Double.parseDouble(sc.nextLine());
+            Convenio convenio = new Convenio(nomeConvenio, percentualDesconto);
 
-            pagamento = new PagamentoConvenio(idxConsulta, valor, tipoPag, nomeConvenio, percentualDesconto);
+            pagamento = new PagamentoConvenio(idxConsulta, valor, tipoPag, convenio, convenio.getPercentualCobertura());
 
             pagamentos.add(pagamento);
 

@@ -48,8 +48,8 @@ public class TesteJornadas {
         } catch (RuntimeException e) {
             System.out.println("nao foi possivel transferir os dias: " + e.getMessage());
         }
-
-        PagamentoConvenio pagamento = new PagamentoConvenio(0, 180.0, "convenio", "SaudePlus", 30.0);
+        Convenio convenio = new Convenio("SaudePlus", 30.0);
+        PagamentoConvenio pagamento = new PagamentoConvenio(0, 180.0, "convenio", convenio, convenio.getPercentualCobertura());
 
         List<Exportavel> exportaveis = new ArrayList<>();
         exportaveis.add(atendimento);

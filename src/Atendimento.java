@@ -1,91 +1,90 @@
-
-
 public class Atendimento implements Exportavel {
+
     private int indiceConsulta;
-    private String observacoes;
-    private String diagnostico;
-    private String[] procedimentos;
-    private int totalProcedimentos;
+    private Prontuario prontuario;
 
     // registro basico - so observacoes
     public Atendimento(int indiceConsulta, String observacoes) {
+
         this.indiceConsulta = indiceConsulta;
-        this.observacoes = observacoes;
-        this.diagnostico = "";
-        this.procedimentos = new String[10];
-        this.totalProcedimentos = 0;
+
+        this.prontuario = new Prontuario();
+        this.prontuario.setObservacoes(observacoes);
     }
 
-    public Atendimento(int indiceConsulta, String observacoes, String diagnostico) {
+    // registro com diagnostico
+    public Atendimento(int indiceConsulta,
+                       String observacoes,
+                       String diagnostico) {
+
         this.indiceConsulta = indiceConsulta;
-        this.observacoes = observacoes;
-        this.diagnostico = diagnostico;
-        this.procedimentos = new String[10];
-        this.totalProcedimentos = 0;
+
+        this.prontuario = new Prontuario();
+        this.prontuario.setObservacoes(observacoes);
+        this.prontuario.setDiagnostico(diagnostico);
     }
 
-    // registro completo com procedimentos ja definidos
-    public Atendimento(int indiceConsulta, String observacoes, String diagnostico,
-                       String[] procedimentos, int totalProcedimentos) {
+
+    public Atendimento(int indiceConsulta,
+                       String observacoes,
+                       String diagnostico,
+                       String[] procedimentos,
+                       int totalProcedimentos) {
+
         this.indiceConsulta = indiceConsulta;
-        this.observacoes = observacoes;
-        this.diagnostico = diagnostico;
-        this.procedimentos = new String[10];
-        this.totalProcedimentos = totalProcedimentos;
+
+        this.prontuario = new Prontuario();
+
+        this.prontuario.setObservacoes(observacoes);
+        this.prontuario.setDiagnostico(diagnostico);
+
         for (int i = 0; i < totalProcedimentos; i++) {
-            this.procedimentos[i] = procedimentos[i];
+            this.prontuario.adicionarProcedimento(procedimentos[i]);
         }
     }
 
-    // adiciona um por vez
     public void adicionarProcedimento(String procedimento) {
-        if (totalProcedimentos < 10) {
-            procedimentos[totalProcedimentos] = procedimento;
-            totalProcedimentos++;
-        }
+
+        prontuario.adicionarProcedimento(procedimento);
+
     }
 
-    // adiciona varios de uma vez
-    public void adicionarProcedimento(String[] procs, int quantidade) {
-        for (int i = 0; i < quantidade; i++) {
-            if (totalProcedimentos < 10) {
-                procedimentos[totalProcedimentos] = procs[i];
-                totalProcedimentos++;
-            }
-        }
+    public void adicionarProcedimento(String[] procs,
+                                      int quantidade) {
+
+        prontuario.adicionarProcedimento(procs, quantidade);
+
     }
 
     public String exibirResumo() {
-        String resumo = "Observacoes: " + observacoes;
 
-        if (!diagnostico.equals("")) {
-            resumo = resumo + "\nDiagnostico: " + diagnostico;
-        }
+        return prontuario.exibirResumo();
 
-        if (totalProcedimentos > 0) {
-            resumo = resumo + "\nProcedimentos: ";
-            for (int i = 0; i < totalProcedimentos; i++) {
-                resumo = resumo + procedimentos[i];
-                if (i < totalProcedimentos - 1) {
-                    resumo = resumo + ", ";
-                }
-            }
-        }
-        return resumo;
     }
 
-    //paulo-victor1 _ relatorio precisava dos geters 
     public int getIndiceConsulta() {
-    return indiceConsulta;
+        return indiceConsulta;
     }
 
     public String getDiagnostico() {
-    return diagnostico;
+        return prontuario.getDiagnostico();
+    }
+
+    public Prontuario getProntuario() {
+        return prontuario;
     }
 
     @Override
     public void exportarDados() {
-        String resumo = exibirResumo().replace("\n", " | ");
-        System.out.println("Atendimento da consulta " + indiceConsulta + " - " + resumo);
+
+        String resumo =
+                exibirResumo().replace("\n", " | ");
+
+        System.out.println(
+                "Atendimento da consulta "
+                        + indiceConsulta
+                        + " - "
+                        + resumo
+        );
     }
 }
