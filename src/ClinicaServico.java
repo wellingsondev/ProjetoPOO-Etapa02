@@ -1025,5 +1025,21 @@ public class ClinicaServico {
 
     }
 
+    public static List<Profissional> getProfissionais() {
+        return profissionais;
+    }
+
+    public static List<Pagamento> getPagamentos() {
+        return pagamentos;
+    }
+
+    public static List<Atendimento> getAtendimentos() {
+        return atendimentos;
+    }
+
+    public static List<Paciente> getPacientes() {
+        return pacientes;
+    }
+
 }
 
