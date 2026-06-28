@@ -120,4 +120,6 @@ public abstract class Profissional extends Pessoa {
             this.valorConsulta = valorConsulta;
         }
     }
+
+    public abstract void registrarEspecifico(Atendimento atendimento);
 }

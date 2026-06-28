@@ -32,4 +32,10 @@ public class Psicologo extends Profissional {
         return super.exibirResumo()
                 + " | Abordagem: " + abordagemTerapeutica;
     }
+
+    @Override
+    public void registrarEspecifico(Atendimento atendimento) {
+        String abordagem = abordagemTerapeutica.equals("") ? "abordagem nao definida" : abordagemTerapeutica;
+        atendimento.adicionarProcedimento("sessao de psicologia - abordagem " + abordagem);
+    }
 }

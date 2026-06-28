@@ -15,4 +15,9 @@ public class ClinicoGeral extends Profissional {
                          String[] dias, int totalDias) {
         super(nome, cpf, "clinica geral", registro, valor, dias, totalDias);
     }
+
+    @Override
+    public void registrarEspecifico(Atendimento atendimento) {
+        atendimento.adicionarProcedimento("consulta clinica geral");
+    }
 }
