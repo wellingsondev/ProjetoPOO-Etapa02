@@ -776,9 +776,17 @@ public class ClinicaServico {
                 atendimentos.add(new Atendimento(idxConsulta, obs, diag, procs, qtdProcs));
             }
 
+            Atendimento atendimentoCriado = atendimentos.get(atendimentos.size() - 1);
+            AtendimentoServico atendimentoServico = new AtendimentoServico();
+            try {
+                atendimentoServico.registrarComEspecialidade(atendimentoCriado, consultas.get(idxConsulta), profissionais);
+            } catch (OperacaoInvalidaException e) {
+                System.out.println("aviso: " + e.getMessage());
+            }
+
             consultas.get(idxConsulta).realizar();
             System.out.println("\n--- RESUMO ---");
-            System.out.println(atendimentos.get(atendimentos.size() -1).exibirResumo());
+            System.out.println(atendimentoCriado.exibirResumo());
             System.out.println("Consulta marcada como realizada.");
         }
     // paulo-victor1 - mudei aqui e na minha branch, n foi ajustada da forma q deveria
