@@ -175,7 +175,7 @@
 
                 switch (op) {
                     case 1:
-                        ClinicaServico.gerarRelatorioGeral();
+                        ClinicaServico.gerarRelatorioUnificado();
                         break;
                     case 2:
                         System.out.print("Nome do profissional: ");
