@@ -14,4 +14,9 @@ public class Nutricionista extends Profissional {
                       String[] dias, int totalDias) {
         super(nome, cpf, "nutricao", registro, valor, dias, totalDias);
     }
+
+    @Override
+    public void registrarEspecifico(Atendimento atendimento) {
+        atendimento.adicionarProcedimento("avaliacao nutricional");
+    }
 }

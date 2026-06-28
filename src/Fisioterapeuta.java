@@ -31,4 +31,9 @@ public class Fisioterapeuta extends Profissional {
     public String exibirResumo() {
         return super.exibirResumo() + "\nQuantidade de sessões por paciente: " + quantidadeSessoes;
     }
+
+    @Override
+    public void registrarEspecifico(Atendimento atendimento) {
+        atendimento.adicionarProcedimento("sessao de fisioterapia (" + quantidadeSessoes + " sessoes previstas)");
+    }
 }

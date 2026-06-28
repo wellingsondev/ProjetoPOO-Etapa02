@@ -1,6 +1,6 @@
 
 
-public class Atendimento {
+public class Atendimento implements Exportavel {
     private int indiceConsulta;
     private String observacoes;
     private String diagnostico;
@@ -81,5 +81,11 @@ public class Atendimento {
 
     public String getDiagnostico() {
     return diagnostico;
+    }
+
+    @Override
+    public void exportarDados() {
+        String resumo = exibirResumo().replace("\n", " | ");
+        System.out.println("Atendimento da consulta " + indiceConsulta + " - " + resumo);
     }
 }
