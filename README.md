@@ -62,12 +62,14 @@ java Main
 Caso utilize uma IDE, basta abrir o projeto e executar a classe Main.java.
 
 4. Descrição de Como Realizar as Operações do Sistema
+   
 4.1 Cadastro de Pacientes
 Selecione a opção de cadastro no menu principal.
 Informe os dados solicitados.
 Escolha o tipo de cadastro.
 Caso possua convênio, informe seus dados.
 Confirme o cadastro.
+
 4.2 Cadastro de Profissionais
 Selecione a opção de cadastro de profissional.
 Escolha a especialidade.
@@ -75,6 +77,7 @@ Informe os dados solicitados.
 Defina o valor da consulta.
 Informe os dias disponíveis para atendimento.
 Confirme o cadastro.
+
 4.3 Agendamento de Consultas
 Selecione a opção de agendamento.
 Informe o CPF do paciente.
@@ -82,27 +85,32 @@ Escolha o profissional ou a especialidade.
 Informe a data e o horário desejados.
 Caso exista conflito, o sistema informará e poderá sugerir outro horário.
 Confirme o agendamento.
+
 4.4 Cancelamento de Consultas
 Selecione a opção de cancelamento.
 Informe os dados da consulta.
 Confirme a operação.
 O sistema registrará o cancelamento e aplicará multa quando necessário.
+
 4.5 Remarcação de Consultas
 Selecione a opção de remarcação.
 Informe os dados da consulta.
 Informe a nova data e horário.
 Confirme a operação.
+
 4.6 Registro de Atendimento
 Selecione a consulta realizada.
 Informe as observações do atendimento.
 Informe o diagnóstico, quando necessário.
 Registre os procedimentos realizados.
 O sistema armazenará as informações no prontuário do atendimento.
+
 4.7 Registro de Pagamentos
 Selecione a consulta.
 Escolha a forma de pagamento.
 Informe os dados necessários para a modalidade escolhida.
 Confirme o pagamento.
+
 4.8 Emissão de Relatórios
 Selecione a opção de relatórios.
 Escolha o tipo de relatório desejado.
