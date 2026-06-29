@@ -1,4 +1,5 @@
-Sistema de Gerenciamento de Clínica
+ Sistema de Gerenciamento de Clínica
+
 1. Descrição do Sistema
 O Sistema de Gerenciamento de Clínica foi desenvolvido como atividade da disciplina de Programação Orientada a Objetos com o objetivo de simular as principais operações realizadas em uma clínica médica.
 
@@ -48,48 +49,65 @@ java Main
 
 Em uma IDE, basta executar a classe Main.java.
 4. Descrição de Como Realizar as Operações do Sistema
+
 4.1 Cadastro de Pacientes
-    1. Selecione a opção de cadastro no menu principal.
-    2. Informe os dados solicitados.
-    3. Escolha o tipo de cadastro.
-    4. Caso possua convênio, informe seus dados.
-    5. Confirme o cadastro.
+
+1. Selecione a opção de cadastro no menu principal.
+2. Informe os dados solicitados.
+3. Escolha o tipo de cadastro.
+4. Caso possua convênio, informe seus dados.
+5. Confirme o cadastro.
+
+    
 4.2 Cadastro de Profissionais
-    6. Selecione a opção de cadastro de profissional.
-    7. Escolha a especialidade.
-    8. Informe os dados solicitados.
-    9. Defina o valor da consulta.
-    10. Informe os dias disponíveis para atendimento.
-    11. Confirme o cadastro.
+
+6. Selecione a opção de cadastro de profissional.
+7. Escolha a especialidade.
+8. Informe os dados solicitados.
+9. Defina o valor da consulta.
+10. Informe os dias disponíveis para atendimento.
+11. Confirme o cadastro.
+
 4.3 Agendamento de Consultas
-    12. Selecione a opção de agendamento.
-    13. Informe o CPF do paciente.
-    14. Escolha o profissional ou a especialidade.
-    15. Informe a data e o horário desejados.
-    16. Caso exista conflito, o sistema informará e poderá sugerir outro horário.
-    17. Confirme o agendamento.
+
+12. Selecione a opção de agendamento.
+13. Informe o CPF do paciente.
+14. Escolha o profissional ou a especialidade.
+15. Informe a data e o horário desejados.
+16. Caso exista conflito, o sistema informará e poderá sugerir outro horário.
+17. Confirme o agendamento.
+
 4.4 Cancelamento de Consultas
-    18. Selecione a opção de cancelamento.
-    19. Informe os dados da consulta.
-    20. Confirme a operação.
-    21. O sistema registrará o cancelamento e aplicará multa quando necessário.
+
+18. Selecione a opção de cancelamento.
+19. Informe os dados da consulta.
+20. Confirme a operação.
+21. O sistema registrará o cancelamento e aplicará multa quando necessário.
+
 4.5 Remarcação de Consultas
-    22. Selecione a opção de remarcação.
-    23. Informe os dados da consulta.
-    24. Informe a nova data e horário.
-    25. Confirme a operação.
+
+22. Selecione a opção de remarcação.
+23. Informe os dados da consulta.
+24. Informe a nova data e horário.
+25. Confirme a operação.
+
 4.6 Registro de Atendimento
-    26. Selecione a consulta realizada.
-    27. Informe as observações do atendimento.
-    28. Informe o diagnóstico, quando necessário.
-    29. Registre os procedimentos realizados.
-    30. O sistema armazenará as informações no prontuário do atendimento.
+
+26. Selecione a consulta realizada.
+27. Informe as observações do atendimento.
+28. Informe o diagnóstico, quando necessário.
+29. Registre os procedimentos realizados.
+30. O sistema armazenará as informações no prontuário do atendimento.
+
 4.7 Registro de Pagamentos
-    31. Selecione a consulta.
-    32. Escolha a forma de pagamento.
-    33. Informe os dados necessários para a modalidade escolhida.
-    34. Confirme o pagamento.
+
+31. Selecione a consulta.
+32. Escolha a forma de pagamento.
+33. Informe os dados necessários para a modalidade escolhida.
+34. Confirme o pagamento.
+
 4.8 Emissão de Relatórios
-    35. Selecione a opção de relatórios.
-    36. Escolha o tipo de relatório desejado.
-    37. O sistema exibirá as informações correspondentes.
+
+35. Selecione a opção de relatórios.
+37. Escolha o tipo de relatório desejado.
+39. O sistema exibirá as informações correspondentes.
